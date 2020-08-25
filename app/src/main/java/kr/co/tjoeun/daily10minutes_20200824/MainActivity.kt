@@ -3,6 +3,7 @@ package kr.co.tjoeun.daily10minutes_20200824
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 import kr.co.tjoeun.daily10minutes_20200824.utils.ServerUtil
 import org.json.JSONObject
@@ -30,8 +31,29 @@ class MainActivity : BaseActivity() {
 
 //                    실제로 응답이 돌아왔을때 실행시켜줄 내용
 
-                    Log.d("메인화면에서 응답확인", json.toString())
+                    val codeNum = json.getInt("code")
 
+                    if (codeNum == 200) {
+//                        서버개발자가 => 로그인 성공일때는 code를 200으로 준다.
+//                        로그인 성공시에 대한 코드
+                        Log.d("로그인시도", "성공 상황")
+                        
+//                        토스트도 일종의 UI 영향 코드 => runOnUiThread 안에서 실행
+                        runOnUiThread {
+                            Toast.makeText(mContext, "로그인 성공", Toast.LENGTH_SHORT).show()
+                        }
+
+                    }
+                    else {
+//                        로그인 실패 코드
+                        Log.e("로그인시도", "실패 상황")
+
+                        runOnUiThread {
+                            Toast.makeText(mContext, "로그인 실패", Toast.LENGTH_SHORT).show()
+                        }
+
+
+                    }
                 }
 
             })
