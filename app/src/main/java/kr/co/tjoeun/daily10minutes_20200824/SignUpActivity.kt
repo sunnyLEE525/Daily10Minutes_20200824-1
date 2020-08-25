@@ -20,6 +20,39 @@ class SignUpActivity : BaseActivity() {
 
     override fun setupEvents() {
 
+//        비밀번호 입력칸의 내용 변경된 경우
+//        입력된 비번의 길이에 따른 문구 출력
+//        0글자 : "비밀번호를 입력해주세요."
+//        8글자 미만 : "비밀번호가 너무 짧습니다."
+//        8글자 이상 : "사용해도 좋은 비밀번호 입니다."
+
+        signUpPasswordEdt.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {
+
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+                val inputPassword = p0.toString()
+
+                if (inputPassword.length == 0) {
+                    passwordCheckResultTxt.text = "비밀번호를 입력해주세요."
+                }
+                else if (inputPassword.length < 8) {
+                    passwordCheckResultTxt.text = "비밀번호가 너무 짧습니다."
+                }
+                else {
+                    passwordCheckResultTxt.text = "사용해도 좋은 비밀번호입니다."
+                }
+            }
+
+        })
+
+
 //        이메일 입력칸의 내용이 변경된 경우 => 중복검사를 다시 하도록 유도
 
         signUpEmailEdt.addTextChangedListener(object : TextWatcher {
