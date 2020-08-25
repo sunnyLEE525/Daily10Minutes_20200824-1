@@ -46,10 +46,14 @@ class MainActivity : BaseActivity() {
                     }
                     else {
 //                        로그인 실패 코드
+//                        왜? 실패했는지 서버가 알려주는 사유를 토스트로 출력 (응용문제)
                         Log.e("로그인시도", "실패 상황")
 
+//                        서버가 message 이름으로 담아주는 실패 사유 추출
+                        val message = json.getString("message")
+
                         runOnUiThread {
-                            Toast.makeText(mContext, "로그인 실패", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show()
                         }
 
 
