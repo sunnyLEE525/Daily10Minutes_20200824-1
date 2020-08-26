@@ -52,7 +52,40 @@ class SignUpActivity : BaseActivity() {
             alert.setMessage("닉네임은 한번 정하면 변경이 불가능합니다. 정말 회원가입 하시겠습니까?")
             alert.setPositiveButton("확인", DialogInterface.OnClickListener { dialogInterface, i ->
 
+                val inputId = signUpEmailEdt.text.toString()
+                val inputPw = signUpPasswordEdt.text.toString()
+                val inputNickName = nickNameEdt.text.toString()
+
 //                실제 회원가입 기능 (API) 호출
+                ServerUtil.putRequestSignUp(inputId, inputPw, inputNickName, object : ServerUtil.JsonResponseHandler {
+                    override fun onResponse(json: JSONObject) {
+
+//                        연습문제
+//                        1. 회원가입에 성공한 경우, "회원이 되신것을 환영합니다." 토스트 + 로그인화면 복귀
+//                        2. 회원가입에 실패한 경우, 왜 실패했는지 서버가 알려주는 메세지를 토스트로 출력
+
+                        val code = json.getInt("code")
+
+                        if (code == 200) {
+                            runOnUiThread {
+                                Toast.makeText(mContext, "회원이 되신것을 환영합니다.", Toast.LENGTH_SHORT).show()
+                                finish()
+                            }
+                        }
+                        else {
+
+                            val message = json.getString("message")
+                            runOnUiThread {
+                                Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show()
+                            }
+
+                        }
+
+
+
+                    }
+
+                })
 
             })
             alert.setNegativeButton("취소", null)
