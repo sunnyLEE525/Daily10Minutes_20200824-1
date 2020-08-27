@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import kr.co.tjoeun.daily10minutes_20200824.R
 import kr.co.tjoeun.daily10minutes_20200824.datas.Project
@@ -24,6 +26,15 @@ class ProjectAdapter(
         }
 
         val row = tempRow!!
+
+        val projectImg = row.findViewById<ImageView>(R.id.projectImg)
+        val projectTitleTxt = row.findViewById<TextView>(R.id.projectTitleTxt)
+        val projectDescTxt = row.findViewById<TextView>(R.id.projectDescTxt)
+
+        val data = mList[position]
+
+        projectTitleTxt.text = data.title
+        projectDescTxt.text = data.description
 
         return row
     }
