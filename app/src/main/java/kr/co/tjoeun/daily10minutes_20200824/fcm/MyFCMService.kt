@@ -1,6 +1,9 @@
 package kr.co.tjoeun.daily10minutes_20200824.fcm
 
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
+import android.widget.Toast
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
@@ -16,6 +19,16 @@ class MyFCMService : FirebaseMessagingService() {
         super.onMessageReceived(p0)
 
         Log.d("받은메세지", p0.notification?.title.toString())
+        Log.d("받은메세지", p0.notification?.body.toString())
+
+        val myHandler = Handler(Looper.getMainLooper())
+
+//        메인 쓰레드 - UI쓰레드를 돌아주는 myHandler를 통해 토스트 출력
+        myHandler.post {
+            Toast.makeText(applicationContext, p0.notification?.title.toString(), Toast.LENGTH_SHORT).show()
+        }
+
+
 
     }
 
