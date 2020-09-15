@@ -1,7 +1,11 @@
 package kr.co.tjoeun.daily10minutes_20200824
 
+import android.app.DatePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import kotlinx.android.synthetic.main.activity_view_daily_proof.*
+import java.util.*
 
 class ViewDailyProofActivity : BaseActivity() {
 
@@ -13,6 +17,23 @@ class ViewDailyProofActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
+
+        selectDateBtn.setOnClickListener {
+
+            val datePickerDialog = DatePickerDialog(mContext, DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+//                날짜가 선택되면 실행해줄 코드
+
+                Log.d("선택된 년", year.toString())
+                Log.d("선택된 월", month.toString())
+                Log.d("선택된 일", dayOfMonth.toString())
+
+//                실생활 : 1~12월
+//                JAVA / Kotlin : 0~11월
+
+            }, 2020, Calendar.JUNE, 9)
+            datePickerDialog.show()
+
+        }
 
     }
 
