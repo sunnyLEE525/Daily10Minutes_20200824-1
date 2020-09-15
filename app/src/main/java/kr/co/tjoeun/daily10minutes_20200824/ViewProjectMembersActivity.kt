@@ -51,7 +51,10 @@ class ViewProjectMembersActivity : BaseActivity() {
 
 //                    memberObj => User 형태로 변환 => ArrayList에 추가
 
+                    val user = User.getUserFromJson(memberObj)
 
+
+                    mProjectMembers.add(user)
 
 
                 }
