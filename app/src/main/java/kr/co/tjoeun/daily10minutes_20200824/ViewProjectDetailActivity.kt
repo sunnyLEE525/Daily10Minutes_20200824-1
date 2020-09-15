@@ -1,6 +1,7 @@
 package kr.co.tjoeun.daily10minutes_20200824
 
 import android.content.DialogInterface
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -23,6 +24,13 @@ class ViewProjectDetailActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
+
+        viewAllMembersBtn.setOnClickListener {
+
+            val myIntent = Intent(mContext, ViewProjectMembersActivity::class.java)
+            startActivity(myIntent)
+
+        }
 
 //        신청하기 버튼을 누르면 => 정말 신청할건지? 확인(AlertDialog)하고 => 확인되면 신청 처리.
 
