@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.bumptech.glide.Glide
+import de.hdodenhof.circleimageview.CircleImageView
 import kr.co.tjoeun.daily10minutes_20200824.R
 import kr.co.tjoeun.daily10minutes_20200824.datas.Project
 import kr.co.tjoeun.daily10minutes_20200824.datas.User
@@ -28,6 +29,17 @@ class ProjectMemberAdapter(
         }
 
         val row = tempRow!!
+
+        val userFirstProfileImg = row.findViewById<ImageView>(R.id.userFirstProfileImg)
+        val userNickNameTxt = row.findViewById<TextView>(R.id.userNickNameTxt)
+        val userEmailTxt = row.findViewById<TextView>(R.id.userEmailTxt)
+
+        val user = mList[position]
+
+        userNickNameTxt.text = user.nickName
+        userEmailTxt.text = user.email
+
+        Glide.with(mContext).load(user.profileImageArrayList[0]).into(userFirstProfileImg)
 
 
         return row
