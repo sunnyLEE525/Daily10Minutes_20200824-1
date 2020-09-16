@@ -62,6 +62,17 @@ class ViewDailyProofActivity : BaseActivity() {
 
     override fun setValues() {
 
+//        이 화면이 실행되면 오늘 날짜를 => 2020년 9월 5일 양식으로 selectedDateTxt에 출력
+
+        val todayCal = Calendar.getInstance()  // 기본값이 현재 일시 => 오늘 날짜가 담겨있다.
+
+        val sdf = SimpleDateFormat("yyyy년 M월 d일")
+
+        val todayStr = sdf.format(todayCal.time)
+
+        selectedDateTxt.text = todayStr
+
+
     }
 
 }
