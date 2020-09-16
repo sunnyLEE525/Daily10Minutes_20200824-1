@@ -4,10 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import com.bumptech.glide.Glide
 import de.hdodenhof.circleimageview.CircleImageView
 import kr.co.tjoeun.daily10minutes_20200824.R
@@ -35,6 +32,8 @@ class ProofAdapter(
         val proofFirstImg = row.findViewById<ImageView>(R.id.proofFirstImg)
         val writeProfileImg = row.findViewById<ImageView>(R.id.writeProfileImg)
         val writerNickName = row.findViewById<TextView>(R.id.writerNickName)
+        val replyBtn = row.findViewById<Button>(R.id.replyBtn)
+        val likeBtn = row.findViewById<Button>(R.id.likeBtn)
 
         val data = mList[position]
 
@@ -59,6 +58,13 @@ class ProofAdapter(
         Glide.with(mContext).load(data.writer.profileImageArrayList[0]).into(writeProfileImg)
 
         writerNickName.text = data.writer.nickName
+
+//        댓글 갯수 / 좋아요 갯수 반영
+
+        likeBtn.text = "좋아요 : ${data.likeCount}개"
+        replyBtn.text = "댓글 : ${data.replyCount}개"
+
+
 
         return row
     }
