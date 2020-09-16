@@ -107,6 +107,10 @@ class ViewDailyProofActivity : BaseActivity() {
 
                 val proofsJSONArr = projectObj.getJSONArray("proofs")
 
+//                날짜가 달라지면 => 기존에 불러온 내용은 전부 지우고 새로 채워주자.
+
+                mProofList.clear()
+
                 for (i in 0 until proofsJSONArr.length()) {
 
                     val proof = Proof.getProofFromJson(proofsJSONArr.getJSONObject(i))
