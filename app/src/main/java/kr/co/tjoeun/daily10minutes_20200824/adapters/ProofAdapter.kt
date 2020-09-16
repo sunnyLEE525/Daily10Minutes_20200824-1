@@ -1,6 +1,9 @@
 package kr.co.tjoeun.daily10minutes_20200824.adapters
 
 import android.content.Context
+import android.content.Intent
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,9 +11,13 @@ import android.widget.*
 import com.bumptech.glide.Glide
 import de.hdodenhof.circleimageview.CircleImageView
 import kr.co.tjoeun.daily10minutes_20200824.R
+import kr.co.tjoeun.daily10minutes_20200824.ViewDailyProofActivity
+import kr.co.tjoeun.daily10minutes_20200824.ViewProjectMembersActivity
 import kr.co.tjoeun.daily10minutes_20200824.datas.Project
 import kr.co.tjoeun.daily10minutes_20200824.datas.Proof
 import kr.co.tjoeun.daily10minutes_20200824.datas.User
+import kr.co.tjoeun.daily10minutes_20200824.utils.ServerUtil
+import org.json.JSONObject
 
 class ProofAdapter(
     val mContext:Context,
@@ -63,6 +70,30 @@ class ProofAdapter(
 
         likeBtn.text = "좋아요 : ${data.likeCount}개"
         replyBtn.text = "댓글 : ${data.replyCount}개"
+
+//        좋아요 버튼이 눌리면 => /like_proof = POST 호출하도록
+
+        likeBtn.setOnClickListener {
+
+            ServerUtil.postRequestLikeProof(mContext, data.id, object : ServerUtil.JsonResponseHandler{
+                override fun onResponse(json: JSONObject) {
+
+                    val dataObj = json.getJSONObject("data")
+                    val likeObj = dataObj.getJSONObject("like")
+
+                    data.likeCount = likeObj.getInt("like_count")
+
+//                    data의 항목 변경 => 리스트뷰의 내용 변경 발생 => notifyDataSetChanged 실행
+
+                    val myHandler = Handler(Looper.getMainLooper())
+
+                    myHandler.post {
+                        notifyDataSetChanged()
+                    }
+                }
+            })
+
+        }
 
 
 
