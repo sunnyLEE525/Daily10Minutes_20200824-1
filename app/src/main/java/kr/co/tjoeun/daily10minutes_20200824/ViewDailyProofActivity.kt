@@ -29,6 +29,20 @@ class ViewDailyProofActivity : BaseActivity() {
         setValues()
     }
 
+//    이 화면으로 돌아올 때마다 => 자동으로 오늘 인증글을 다시 받아오게 처리
+
+    override fun onResume() {
+        super.onResume()
+
+//        오늘 날짜를 2020-09-17 형대로 가공해서 서버에서 인증글 가져오기
+
+        val now = Calendar.getInstance()
+        val sdf = SimpleDateFormat("yyyy-MM-dd")
+
+        getProofListByDate(sdf.format(now.time))
+
+    }
+
     override fun setupEvents() {
 
         writeProofBtn.setOnClickListener {
