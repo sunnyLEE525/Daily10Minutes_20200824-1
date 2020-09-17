@@ -71,6 +71,17 @@ class ProofAdapter(
         likeBtn.text = "좋아요 : ${data.likeCount}개"
         replyBtn.text = "댓글 : ${data.replyCount}개"
 
+//        내 좋아요 여부 반영
+//        내가 좋아요 X => 회색 테두리 박스
+//        내가 좋아요 O => 빨간 테두리 박스
+
+        if (data.isMyLikeProof) {
+            likeBtn.setBackgroundResource(R.drawable.red_border_box)
+        }
+        else {
+            likeBtn.setBackgroundResource(R.drawable.gray_border_box)
+        }
+
 //        좋아요 버튼이 눌리면 => /like_proof = POST 호출하도록
 
         likeBtn.setOnClickListener {
@@ -82,6 +93,9 @@ class ProofAdapter(
                     val likeObj = dataObj.getJSONObject("like")
 
                     data.likeCount = likeObj.getInt("like_count")
+
+//                    내
+                    data.isMyLikeProof = likeObj.getBoolean("my_like")
 
 //                    data의 항목 변경 => 리스트뷰의 내용 변경 발생 => notifyDataSetChanged 실행
 
