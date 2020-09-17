@@ -77,9 +77,11 @@ class ProofAdapter(
 
         if (data.isMyLikeProof) {
             likeBtn.setBackgroundResource(R.drawable.red_border_box)
+            likeBtn.setTextColor(mContext.resources.getColor(R.color.red))
         }
         else {
             likeBtn.setBackgroundResource(R.drawable.gray_border_box)
+            likeBtn.setTextColor(mContext.resources.getColor(R.color.darkGray))
         }
 
 //        좋아요 버튼이 눌리면 => /like_proof = POST 호출하도록
@@ -94,7 +96,7 @@ class ProofAdapter(
 
                     data.likeCount = likeObj.getInt("like_count")
 
-//                    내
+//                    내 좋아요 눌렸을 때 변경
                     data.isMyLikeProof = likeObj.getBoolean("my_like")
 
 //                    data의 항목 변경 => 리스트뷰의 내용 변경 발생 => notifyDataSetChanged 실행
